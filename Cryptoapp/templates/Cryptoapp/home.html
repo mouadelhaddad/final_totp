@@ -1,0 +1,35 @@
+{% extends "Cryptoapp/base.html" %}
+
+{% block content %}
+<br>
+<div class="row justify-content-center mt-5">
+        <div class="col-md-7 text-center">
+                 <h1 style="color:white;">CipherSpace</h1>
+                  <br>    
+        <p style="color:white;">Ciphers are functions either through a form of math formulas or some other form of methods that can be repeated through steps.CipherSpace is an app with multiple cipher forms which offers encryption and deryption services.</p>
+        <br>
+        <br>
+        <form action="{% url 'Cipher' %}">
+        <select name="Choix d'algorithme">
+        <option value="cesar" selected="selected">Cesar Cipher</option>
+        <option value="Homophonic">Homophonic Substitution Cipher</option>
+        <option value="Hill">Hill Cipher</option>
+        <option value="Vigenere">Vigenere Cipher</option>
+        <option value="Vernam">Vernam Cipher</option>
+        <option value="Permutation">Permutation Cipher</option>
+        <option value="ECB">ECB with Vigenre encryption </option>
+        <option value="CBC">CBC encryption</option>
+        <option value="CTR">CTR encryption</option> 
+        <option value="RC4">RC4 encryption  </option> 
+    </select>
+    <br>
+    <br>
+     <p style="color:white;">choose your algorithm</p>
+    
+    <br>
+        <input type="submit" value="Get started" class="btn btn-warning">
+        </div>
+    </div>
+    
+
+{% endblock %}

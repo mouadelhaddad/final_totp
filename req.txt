@@ -1,0 +1,10 @@
+django
+string
+random
+numpy
+sympy
+copy
+codecs
+smtplib
+ssl
+email

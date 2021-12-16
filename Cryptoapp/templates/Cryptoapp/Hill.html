@@ -1,0 +1,49 @@
+{% extends "Cryptoapp/base.html" %}
+
+{% block content %}
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-5">
+            <h1 style="color:white;">Hill Cipher</h1>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-5">
+            {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endif %}
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="Plaintext" style="color:white;">Plaintext / Ciphertext</label>
+                    <input type="text" name="Plaintext" class="form-control" id="Plaintext">
+                </div>
+                <div class="form-group">
+                    <label for="key" style="color:white;">Enter 9 letter Key String: :</label>
+                    <input type="text" name="key" class="form-control" id="key">
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="encrypte" checked>
+                    <label class="form-check-label" for="exampleRadios1" style="color:white;">encrypt</label>
+                    <br>
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="decrypte">
+                    <label class="form-check-label" for="exampleRadios2" style="color:white;">decrypt</label>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-warning">Run</button>
+            </form>
+            <br>
+            {% if info%}
+                <h3 style="color:white;">Your Ciphertext is:</h3>
+                <h3 class="alert alert-warning">{{ Ciphertext }}</h3>
+            {% endif %}
+            {% if info1 %}
+                <h3 style="color:white;">Your Plaintext is:</h3>
+                <h3 class="alert alert-warning">{{ Ciphertext }}</h3>
+            {% endif %}
+            <hr>
+        </div>
+    </div>
+{% endblock %}
