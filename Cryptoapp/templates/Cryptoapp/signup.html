@@ -29,15 +29,18 @@
                 </div>
                 <div class="form-group">
                     <label for="email" style="color:white">E-mail</label>
-                    <input type="email" name="email" class="form-control" id="email" required>
+                    <input type="email" name="email" class="form-control" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$" required>
                 </div>
                 <div class="form-group">
                     <label for="password" style="color:white">Password</label>
-                    <input type="password" name="password" class="form-control" id="password" required>
+                    <input type="password" name="password" class="form-control" id="password" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  required>
+                </div>
+                <div >
+                  <p style="color:red" > The password need to contain an uppercase and lowercase plus a special character with a minlength of 8</p>
                 </div>
                 <div class="form-group">
                     <label for="password1" style="color:white">Confirm the password</label>
-                    <input type="password" name="password1" class="form-control" id="password1" required>
+                    <input type="password" name="password1" class="form-control" id="password1"  required>
                 </div>
                 <br>
                 <button type="submit" class="btn btn-warning" style="color:black">Sign up</button>
@@ -50,4 +53,20 @@
             <hr>
         </div>
     </div>
+<script id="rendered-js" >
+var password = document.getElementById("password")
+  , confirm_password = document.getElementById("password1");
+
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Passwords Don't Match");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+//# sourceURL=pen.js
+</script>
 {% endblock %}

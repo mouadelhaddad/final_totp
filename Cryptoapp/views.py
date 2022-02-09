@@ -9,14 +9,14 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from Cryptoapp.forms import CustomUserCreationForm
 from Cryptoapp.email import *
-from validate_email import validate_email
 from django.contrib import messages
-from django_otp.decorators import otp_required
 import pyotp
 from Cryptoapp.models import *
-
+from Cryptoapp.qr import *
+import pathlib
+import os
 # Create your views here.
-user=None
+
 def loginuser(request):
     global user
     if request.user.is_authenticated:
@@ -29,19 +29,6 @@ def loginuser(request):
             if user is None:
                 return render(request, 'Cryptoapp/login.html', {'form': AuthenticationForm(),'error': 'Le nom d\'utilisateur ou le mot de passe est incorrect'})
             else:
-                return redirect('twoFA')
-
-def twoFA(request):
-    global user
-    if request.user.is_authenticated:
-        return redirect('home')
-    else:
-        if request.method == 'GET':
-            return render(request, 'Cryptoapp/2FA.html', {'form': AuthenticationForm()})
-        else:
-            if user is None:
-                return redirect('login')
-            else:
                 token=request.POST['Token']
                 instance = otpuser.objects.get(username=user)
                 TK=instance.token
@@ -52,7 +39,7 @@ def twoFA(request):
                     user=None
                     return redirect('home')
                 else:
-                    return redirect('login')
+                    return render(request, 'Cryptoapp/login.html', {'form': AuthenticationForm(),'error': 'Le nom d\'utilisateur ou le mot de passe est incorrect'})
 
 def signup(request):
     if request.user.is_authenticated:
@@ -71,7 +58,7 @@ def signup(request):
                 return render(request, 'Cryptoapp/signup.html', {'form': AuthenticationForm(),'error': 'Username already taken choose an other one'})
             if password!=password1:
                 return render(request, 'Cryptoapp/signup.html', {'form': AuthenticationForm(),'error': 'incorrect password confirmation'})
-            if not (validate_email(email,verify=True)):
+            if not (isValid(email)):
                 return render(request, 'Cryptoapp/signup.html', {'form': AuthenticationForm(),'error': 'incorrect email'})
             else:
                 instance = otpuser(username=Username,password=password,email=email,token=pyotp.random_base32())
@@ -83,6 +70,7 @@ def signup(request):
                 user.first_name = first_name
                 user.save()
                 login(request, user)
+                os.remove(pathlib.Path().resolve().as_posix()+"/Cryptoapp/static/qr/qr"+Username+".png")
                 return redirect('home')
 
 

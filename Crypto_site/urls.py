@@ -34,5 +34,4 @@ urlpatterns = [
     path('CTR/',views.CTR,name='CTR'),
     path('RC4/',views.RC4,name='RC4'),
     path('signup/', views.signup, name='signup'),
-    path('twoFA/', views.twoFA, name='twoFA'),
 ]
