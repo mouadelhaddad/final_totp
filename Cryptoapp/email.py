@@ -187,7 +187,7 @@ def sendemail(email,user):
         """
     part = MIMEText(html, "html")
     message.attach(part)
-    with open(pathlib.Path().resolve().as_posix()+"/Cryptoapp/static/qr/qr"+user+".png", 'rb') as f:
+    with open(pathlib.Path().resolve().as_posix()+"/static/Cryptoapp"+user+".png", 'rb') as f:
     # set attachment mime and file name, the image type is png
         mime = MIMEBase('image', 'png', filename='qr.png')
     # add required header data:
