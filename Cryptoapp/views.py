@@ -70,7 +70,7 @@ def signup(request):
                 user.first_name = first_name
                 user.save()
                 login(request, user)
-                os.remove(pathlib.Path().resolve().as_posix()+"/Cryptoapp/static/qr/qr"+Username+".png")
+                os.remove(pathlib.Path().resolve().as_posix()+"/static/Cryptoapp"+Username+".png")
                 return redirect('home')
 
 
