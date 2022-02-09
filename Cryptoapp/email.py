@@ -14,7 +14,7 @@ def sendemail(email,user):
     receiver_email = email # Enter receiver address
     password = "Elhaddadmouad"
     message = MIMEMultipart("alternative")
-    message["Subject"] = "Test"
+    message["Subject"] = "TOTP token for "+user
     message["From"] = sender_email
     message["To"] = receiver_email
     html = """\
