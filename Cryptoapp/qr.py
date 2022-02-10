@@ -8,8 +8,6 @@ def qr(user):
     instance = otpuser.objects.get(username=user)
     link=pyotp.totp.TOTP(instance.token).provisioning_uri(name=user, issuer_name='CipherSpace')
     img=qrcode.make(link)
-    print(link)
-    print(pathlib.Path().resolve().as_posix())
     img.save(pathlib.Path().resolve().as_posix()+"/static/Cryptoapp"+user+".png")
 
 regex = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')
