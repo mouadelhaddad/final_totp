@@ -1,5 +1,5 @@
 Django==3.2.13
-numpy==1.21.0
+numpy==1.22.0
 pyotp==2.6.0
 qrcode==6.1
 scapy==2.4.5
