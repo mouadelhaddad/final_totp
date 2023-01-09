@@ -1,4 +1,4 @@
-Django==3.2.14
+Django==3.2.16
 numpy==1.22.0
 pyotp==2.6.0
 qrcode==6.1
